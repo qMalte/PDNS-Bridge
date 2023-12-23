@@ -80,4 +80,8 @@ export class ZoneHelper {
         }
     }
 
+    static generateSerial(): number {
+        return Math.floor(Date.now() / 1000);
+    }
+
 }

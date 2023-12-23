@@ -91,6 +91,9 @@ class ZoneHelper {
             }
         });
     }
+    static generateSerial() {
+        return Math.floor(Date.now() / 1000);
+    }
 }
 exports.ZoneHelper = ZoneHelper;
 //# sourceMappingURL=ZoneHelper.js.map

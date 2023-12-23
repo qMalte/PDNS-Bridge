@@ -8,6 +8,7 @@ import LogUrlMiddleware from "./middlewares/LogUrlMiddleware";
 import router from "./routes/api";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
+import {ZoneHelper} from "./utils/ZoneHelper";
 
 dotenv.config();
 
