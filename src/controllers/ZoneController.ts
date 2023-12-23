@@ -60,6 +60,8 @@ export class ZoneController {
                 return res.status(404).end();
             }
 
+            zone.serial = ZoneHelper.generateSerial();
+
             res = await PowerDNS.masterInstance.ZoneEndpoint.createZone(servers[0].id, zone)
                 ? res.status(200)
                 : res.status(500);

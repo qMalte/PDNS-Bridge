@@ -59,6 +59,7 @@ class ZoneController {
                 if (servers.length === 0) {
                     return res.status(404).end();
                 }
+                zone.serial = ZoneHelper_1.ZoneHelper.generateSerial();
                 res = (yield PowerDNS_1.PowerDNS.masterInstance.ZoneEndpoint.createZone(servers[0].id, zone))
                     ? res.status(200)
                     : res.status(500);
