@@ -87,8 +87,6 @@ class ZoneController {
                 if (servers.length === 0) {
                     return res.status(404).end();
                 }
-                zone.soa_edit_api = 'DEFAULT';
-                zone.api_rectify = true;
                 zone.rrsets = zone.rrsets.filter(r => r.type != null && r.type !== '');
                 res = (yield PowerDNS_1.PowerDNS.masterInstance.ZoneEndpoint.modifyZone(servers[0].id, zone.id, zone))
                     ? res.status(200)
