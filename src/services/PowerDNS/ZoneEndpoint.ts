@@ -65,6 +65,7 @@ export class ZoneEndpoint {
                 .set(this.core.apiKey);
             return query.ok;
         } catch (e) {
+            console.log(e);
             return false;
         }
     }

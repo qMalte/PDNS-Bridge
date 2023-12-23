@@ -85,6 +85,7 @@ class ZoneEndpoint {
                 return query.ok;
             }
             catch (e) {
+                console.log(e);
                 return false;
             }
         });
