@@ -98,6 +98,7 @@ export class ZoneController {
 
             zone.soa_edit_api = 'DEFAULT';
             zone.api_rectify = true;
+            zone.rrsets = zone.rrsets.filter(r => r.type != null && r.type !== '');
 
             res = await PowerDNS.masterInstance.ZoneEndpoint.modifyZone(servers[0].id, zone.id, zone)
                 ? res.status(200)
