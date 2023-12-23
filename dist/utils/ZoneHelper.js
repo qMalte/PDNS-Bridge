@@ -125,7 +125,7 @@ class ZoneHelper {
             ttl: 3600,
             records: [
                 {
-                    content: `${nameservers[0]} hostmaster.centralnode.net ${this.generateSerial()} 10800 3600 604800 3600`,
+                    content: `${nameservers[0]}. hostmaster.centralnode.net. ${this.generateSerial()} 10800 3600 604800 3600`,
                     disabled: false
                 }
             ]
