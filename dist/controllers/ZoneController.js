@@ -60,7 +60,7 @@ class ZoneController {
                     return res.status(404).end();
                 }
                 zone.serial = ZoneHelper_1.ZoneHelper.generateSerial();
-                zone.soa_edit_api = 'INCEPTION-INCREMENT';
+                zone.soa_edit_api = 'DEFAULT';
                 zone.api_rectify = true;
                 res = (yield PowerDNS_1.PowerDNS.masterInstance.ZoneEndpoint.createZone(servers[0].id, zone))
                     ? res.status(200)
@@ -87,7 +87,7 @@ class ZoneController {
                 if (servers.length === 0) {
                     return res.status(404).end();
                 }
-                zone.soa_edit_api = 'INCEPTION-INCREMENT';
+                zone.soa_edit_api = 'DEFAULT';
                 zone.api_rectify = true;
                 res = (yield PowerDNS_1.PowerDNS.masterInstance.ZoneEndpoint.modifyZone(servers[0].id, zone.id, zone))
                     ? res.status(200)
