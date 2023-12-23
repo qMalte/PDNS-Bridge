@@ -84,4 +84,39 @@ export class ZoneHelper {
         return Math.floor(Date.now() / 1000);
     }
 
+    static async updateSOA(zoneId: string) {
+        const servers = await PowerDNS.masterInstance.ServerEndpoint.servers();
+        for (const server of servers) {
+            const zone = await PowerDNS.masterInstance.ZoneEndpoint.getZone(server.id, zoneId);
+            const soa = this.generateSOA(zone);
+            const soaRecord = zone.rrsets.find(x => x.type.toLowerCase() == 'soa');
+            if (soaRecord != null) {
+                soaRecord.records = soa.records;
+                soaRecord.ttl = soa.ttl;
+                soaRecord.changetype = 'REPLACE';
+            } else {
+                zone.rrsets.push(soa);
+            }
+            await PowerDNS.masterInstance.ZoneEndpoint.modifyZone(server.id, zone.id, zone);
+        }
+    }
+
+    static generateSOA(zone: Zone): RRSet {
+        dotenv.config();
+        const nameservers = process.env.NAMESERVERS?.split(',') ?? [];
+        const soa: RRSet = {
+            name: zone.name,
+            type: 'SOA',
+            changetype: 'REPLACE',
+            ttl: 3600,
+            records: [
+                {
+                    content: `${nameservers[0]} hostmaster.centralnode.net ${this.generateSerial()} 10800 3600 604800 3600`,
+                    disabled: false
+                }
+            ]
+        }
+        return soa;
+    }
+
 }

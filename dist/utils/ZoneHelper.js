@@ -94,6 +94,43 @@ class ZoneHelper {
     static generateSerial() {
         return Math.floor(Date.now() / 1000);
     }
+    static updateSOA(zoneId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const servers = yield PowerDNS_1.PowerDNS.masterInstance.ServerEndpoint.servers();
+            for (const server of servers) {
+                const zone = yield PowerDNS_1.PowerDNS.masterInstance.ZoneEndpoint.getZone(server.id, zoneId);
+                const soa = this.generateSOA(zone);
+                const soaRecord = zone.rrsets.find(x => x.type.toLowerCase() == 'soa');
+                if (soaRecord != null) {
+                    soaRecord.records = soa.records;
+                    soaRecord.ttl = soa.ttl;
+                    soaRecord.changetype = 'REPLACE';
+                }
+                else {
+                    zone.rrsets.push(soa);
+                }
+                yield PowerDNS_1.PowerDNS.masterInstance.ZoneEndpoint.modifyZone(server.id, zone.id, zone);
+            }
+        });
+    }
+    static generateSOA(zone) {
+        var _a, _b;
+        dotenv_1.default.config();
+        const nameservers = (_b = (_a = process_1.default.env.NAMESERVERS) === null || _a === void 0 ? void 0 : _a.split(',')) !== null && _b !== void 0 ? _b : [];
+        const soa = {
+            name: zone.name,
+            type: 'SOA',
+            changetype: 'REPLACE',
+            ttl: 3600,
+            records: [
+                {
+                    content: `${nameservers[0]} hostmaster.centralnode.net ${this.generateSerial()} 10800 3600 604800 3600`,
+                    disabled: false
+                }
+            ]
+        };
+        return soa;
+    }
 }
 exports.ZoneHelper = ZoneHelper;
 //# sourceMappingURL=ZoneHelper.js.map

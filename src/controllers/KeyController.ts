@@ -56,6 +56,7 @@ export class KeyController {
             const keys = await PowerDNS.masterInstance.CryptoKeyEndpoint.listCryptoKeys(servers[0].id, zoneId);
 
             if (query) {
+                await ZoneHelper.updateSOA(zone.id);
                 UpdateHelper.update().then();
             }
 
@@ -92,6 +93,7 @@ export class KeyController {
             const query = await PowerDNS.masterInstance.ZoneEndpoint.modifyBasicZone(servers[0].id, zoneId, zone);
 
             if (query) {
+                await ZoneHelper.updateSOA(zone.id);
                 UpdateHelper.update().then();
             }
 

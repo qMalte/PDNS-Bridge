@@ -88,7 +88,8 @@ class ZoneController {
                 res = (yield PowerDNS_1.PowerDNS.masterInstance.ZoneEndpoint.modifyZone(servers[0].id, zone.id, zone))
                     ? res.status(200)
                     : res.status(500);
-                yield UpdateHelper_1.UpdateHelper.update();
+                yield ZoneHelper_1.ZoneHelper.updateSOA(zone.id);
+                UpdateHelper_1.UpdateHelper.update().then();
                 return res.end();
             }
             catch (e) {

@@ -98,7 +98,8 @@ export class ZoneController {
                 ? res.status(200)
                 : res.status(500);
 
-            await UpdateHelper.update();
+            await ZoneHelper.updateSOA(zone.id);
+            UpdateHelper.update().then();
 
             return res.end();
 
