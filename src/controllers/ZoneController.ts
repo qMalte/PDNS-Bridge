@@ -94,9 +94,6 @@ export class ZoneController {
                 return res.status(404).end();
             }
 
-            zone.serial = ZoneHelper.generateSerial();
-            zone.notified_serial = zone.serial;
-
             res = await PowerDNS.masterInstance.ZoneEndpoint.modifyZone(servers[0].id, zone.id, zone)
                 ? res.status(200)
                 : res.status(500);

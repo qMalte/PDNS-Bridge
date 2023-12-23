@@ -12,7 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.KeyController = void 0;
 const PowerDNS_1 = require("../services/PowerDNS");
 const UpdateHelper_1 = require("../utils/UpdateHelper");
-const ZoneHelper_1 = require("../utils/ZoneHelper");
 class KeyController {
     static getKeys(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -49,8 +48,6 @@ class KeyController {
                     return res.status(400).end();
                 }
                 zone.dnssec = true;
-                zone.serial = ZoneHelper_1.ZoneHelper.generateSerial();
-                zone.notified_serial = zone.serial;
                 const query = yield PowerDNS_1.PowerDNS.masterInstance.ZoneEndpoint.modifyBasicZone(servers[0].id, zoneId, zone);
                 const keys = yield PowerDNS_1.PowerDNS.masterInstance.CryptoKeyEndpoint.listCryptoKeys(servers[0].id, zoneId);
                 if (query) {
@@ -79,8 +76,6 @@ class KeyController {
                     return res.status(400).end();
                 }
                 zone.dnssec = false;
-                zone.serial = ZoneHelper_1.ZoneHelper.generateSerial();
-                zone.notified_serial = zone.serial;
                 const query = yield PowerDNS_1.PowerDNS.masterInstance.ZoneEndpoint.modifyBasicZone(servers[0].id, zoneId, zone);
                 if (query) {
                     UpdateHelper_1.UpdateHelper.update().then();
