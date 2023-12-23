@@ -51,6 +51,9 @@ export class KeyController {
             }
 
             zone.dnssec = true;
+            zone.serial++;
+            zone.notified_serial++;
+
             const query = await PowerDNS.masterInstance.ZoneEndpoint.modifyBasicZone(servers[0].id, zoneId, zone);
             const keys = await PowerDNS.masterInstance.CryptoKeyEndpoint.listCryptoKeys(servers[0].id, zoneId);
 
@@ -87,6 +90,8 @@ export class KeyController {
             }
 
             zone.dnssec = false;
+            zone.serial++;
+            zone.notified_serial++;
             const query = await PowerDNS.masterInstance.ZoneEndpoint.modifyBasicZone(servers[0].id, zoneId, zone);
 
             if (query) {

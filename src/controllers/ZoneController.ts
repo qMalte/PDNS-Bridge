@@ -64,11 +64,11 @@ export class ZoneController {
                 ? res.status(200)
                 : res.status(500);
 
-            UpdateHelper.update().then();
-
             if (res) {
-                ZoneHelper.ensureNameServerRecordsExists(zone, servers[0]).then();
+                await ZoneHelper.ensureNameServerRecordsExists(zone, servers[0]);
             }
+
+            UpdateHelper.update().then();
 
             return res.end();
 
@@ -91,6 +91,9 @@ export class ZoneController {
             if (servers.length === 0) {
                 return res.status(404).end();
             }
+
+            zone.serial++;
+            zone.notified_serial++;
 
             res = await PowerDNS.masterInstance.ZoneEndpoint.modifyZone(servers[0].id, zone.id, zone)
                 ? res.status(200)
