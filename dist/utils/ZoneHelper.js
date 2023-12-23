@@ -109,6 +109,7 @@ class ZoneHelper {
                 else {
                     zone.rrsets.push(soa);
                 }
+                console.log(soaRecord);
                 yield PowerDNS_1.PowerDNS.masterInstance.ZoneEndpoint.modifyZone(server.id, zone.id, zone);
             }
         });
