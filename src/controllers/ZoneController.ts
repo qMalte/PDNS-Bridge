@@ -61,6 +61,8 @@ export class ZoneController {
             }
 
             zone.serial = ZoneHelper.generateSerial();
+            zone.soa_edit_api = 'INCEPTION-INCREMENT';
+            zone.api_rectify = true;
 
             res = await PowerDNS.masterInstance.ZoneEndpoint.createZone(servers[0].id, zone)
                 ? res.status(200)
@@ -94,11 +96,13 @@ export class ZoneController {
                 return res.status(404).end();
             }
 
+            zone.soa_edit_api = 'INCEPTION-INCREMENT';
+            zone.api_rectify = true;
+
             res = await PowerDNS.masterInstance.ZoneEndpoint.modifyZone(servers[0].id, zone.id, zone)
                 ? res.status(200)
                 : res.status(500);
 
-            await ZoneHelper.updateSOA(zone.id);
             UpdateHelper.update().then();
 
             return res.end();
