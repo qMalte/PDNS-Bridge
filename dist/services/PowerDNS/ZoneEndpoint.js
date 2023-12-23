@@ -29,6 +29,7 @@ class ZoneEndpoint {
                 return query.ok ? query.body : null;
             }
             catch (e) {
+                console.log(e);
                 return null;
             }
         });
@@ -44,6 +45,7 @@ class ZoneEndpoint {
                 return query.ok ? query.body : null;
             }
             catch (e) {
+                console.log(e);
                 return null;
             }
         });
@@ -58,6 +60,7 @@ class ZoneEndpoint {
                 return query.ok ? query.body : null;
             }
             catch (e) {
+                console.log(e);
                 return null;
             }
         });
@@ -71,6 +74,7 @@ class ZoneEndpoint {
                 return query.ok;
             }
             catch (e) {
+                console.log(e);
                 return false;
             }
         });
@@ -127,6 +131,7 @@ class ZoneEndpoint {
                 return query.ok;
             }
             catch (e) {
+                console.log(e);
                 return false;
             }
         });

@@ -17,6 +17,7 @@ export class ZoneEndpoint {
                 .set(this.core.apiKey);
             return query.ok ? query.body : null;
         } catch (e) {
+            console.log(e);
             return null;
         }
     }
@@ -30,6 +31,7 @@ export class ZoneEndpoint {
                 .set(this.core.apiKey);
             return query.ok ? query.body : null;
         } catch (e) {
+            console.log(e);
             return null;
         }
     }
@@ -42,6 +44,7 @@ export class ZoneEndpoint {
                 .set(this.core.apiKey);
             return query.ok ? query.body : null;
         } catch (e) {
+            console.log(e);
             return null;
         }
     }
@@ -53,6 +56,7 @@ export class ZoneEndpoint {
                 .set(this.core.apiKey);
             return query.ok;
         } catch (e) {
+            console.log(e);
             return false;
         }
     }
@@ -101,6 +105,7 @@ export class ZoneEndpoint {
                 .set(this.core.apiKey);
             return query.ok;
         } catch (e) {
+            console.log(e);
             return false;
         }
     }
