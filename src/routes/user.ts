@@ -1,11 +1,11 @@
 import {Router} from 'express';
-import AuthMiddleware from "../middlewares/AuthMiddleware";
 import {ZoneController} from "../controllers/ZoneController";
 import {KeyController} from "../controllers/KeyController";
 import {StatisticsController} from "../controllers/StatisticsController";
-import {UserController} from "../controllers/UserController";
+import {Middlewares} from "typeauthx/lib";
 
 const router = Router();
+const AuthMiddleware = Middlewares.AuthMiddleware;
 
 router.get('/zone/:id', AuthMiddleware, ZoneController.getZone);
 router.get('/zones', AuthMiddleware, ZoneController.getZones);
@@ -20,6 +20,4 @@ router.delete('/zone/:id/keys', AuthMiddleware, KeyController.DeleteKeys);
 
 router.get('/stats', AuthMiddleware, StatisticsController.getStatistics);
 
-router.get('/user/mails', UserController.getUserWithAddresses);
-
-export default router;
+export {router as userRouter};

@@ -23,6 +23,8 @@ const LogUrlMiddleware_1 = __importDefault(require("./middlewares/LogUrlMiddlewa
 const api_1 = __importDefault(require("./routes/api"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const body_parser_1 = __importDefault(require("body-parser"));
+const lib_1 = require("typeauthx/lib");
+const user_1 = require("./routes/user");
 dotenv_1.default.config();
 class App {
     constructor() {
@@ -34,6 +36,7 @@ class App {
         return __awaiter(this, void 0, void 0, function* () {
             PowerDNS_1.PowerDNS.init();
             yield JobService_1.JobService.init();
+            yield (0, lib_1.InitializeTypeAuthX)(this.app);
             return this;
         });
     }
@@ -46,6 +49,7 @@ class App {
     }
     setupRouting() {
         this.app.use('/api/v1', api_1.default);
+        this.app.use('/api/v1/user', user_1.userRouter);
         return this;
     }
     listen() {

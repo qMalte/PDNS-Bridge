@@ -9,6 +9,8 @@ import router from "./routes/api";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import {ZoneHelper} from "./utils/ZoneHelper";
+import {InitializeTypeAuthX} from "typeauthx/lib";
+import {userRouter} from "./routes/user";
 
 dotenv.config();
 
@@ -21,6 +23,7 @@ export class App {
     async bootstrap() {
         PowerDNS.init();
         await JobService.init();
+        await InitializeTypeAuthX(this.app);
         return this;
     }
 
@@ -34,6 +37,7 @@ export class App {
 
     setupRouting() {
         this.app.use('/api/v1', router);
+        this.app.use('/api/v1/user', userRouter);
         return this;
     }
 

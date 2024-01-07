@@ -1,0 +1,12 @@
+{"address":"127.0.0.1","code":"ESOCKET","command":"CONN","errno":-61,"level":"error","port":587,"service":"user-service","syscall":"connect"}
+{"level":"error","message":"[SMTP-Service] Failed to verify SMTP connection","service":"user-service"}
+{"level":"error","message":"[SMTP-Service] Failed to send mail","service":"user-service"}
+{"address":"127.0.0.1","code":"ESOCKET","command":"CONN","errno":-61,"level":"error","port":587,"service":"user-service","syscall":"connect"}
+{"address":"127.0.0.1","code":"ESOCKET","command":"CONN","errno":-61,"level":"error","port":587,"service":"user-service","syscall":"connect"}
+{"level":"error","message":"[SMTP-Service] Failed to verify SMTP connection","service":"user-service"}
+{"level":"error","message":"[SMTP-Service] Failed to send mail","service":"user-service"}
+{"address":"127.0.0.1","code":"ESOCKET","command":"CONN","errno":-61,"level":"error","port":587,"service":"user-service","syscall":"connect"}
+{"address":"127.0.0.1","code":"ESOCKET","command":"CONN","errno":-61,"level":"error","port":587,"service":"user-service","syscall":"connect"}
+{"level":"error","message":"[SMTP-Service] Failed to verify SMTP connection","service":"user-service"}
+{"level":"error","message":"[SMTP-Service] Failed to send mail","service":"user-service"}
+{"address":"127.0.0.1","code":"ESOCKET","command":"CONN","errno":-61,"level":"error","port":587,"service":"user-service","syscall":"connect"}
